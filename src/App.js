@@ -9,8 +9,8 @@ import TemperatureDisplay from "./components/TemperatureDisplay";
 function App() {
   const [activities, setActivities] = useLocalStorageState("activities", {
     defaultValue: [
-      { id: "1234", name: "Do grocery", isforGoodWeather: true },
-      { id: "4321", name: "Develop weather app", isforGoodWeather: false },
+      { id: uid(), name: "Do grocery", isforGoodWeather: true },
+      { id: uid(), name: "Develop weather app", isforGoodWeather: false },
     ],
   });
   const [weather, setWeather] = useLocalStorageState("weather", {
@@ -46,7 +46,7 @@ function App() {
     };
   }, [setWeather]);
 
-  console.log(activities);
+  // console.log(activities);
 
   const filteredActivities = activities.filter(
     (activity) => activity.isforGoodWeather === weather?.isGoodWeather
