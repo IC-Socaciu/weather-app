@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { uid } from "uid";
 import Form from "./components/Form";
 import List from "./components/List";
@@ -8,7 +8,10 @@ import TemperatureDisplay from "./components/TemperatureDisplay";
 
 function App() {
   const [activities, setActivities] = useLocalStorageState("activities", {
-    defaultValue: [],
+    defaultValue: [
+      { id: "1234", name: "Do grocery", isforGoodWeather: true },
+      { id: "4321", name: "Develop weather app", isforGoodWeather: false },
+    ],
   });
   const [weather, setWeather] = useLocalStorageState("weather", {
     defaultValue: null,
@@ -35,6 +38,12 @@ function App() {
       }
     }
     fetchWeather();
+    const timer = setInterval(() => {
+      fetchWeather();
+    }, 5000);
+    return () => {
+      clearInterval(timer);
+    };
   }, [setWeather]);
 
   console.log(activities);
@@ -46,12 +55,12 @@ function App() {
   return (
     <div>
       <TemperatureDisplay
-        weatherEmoji={weather.condition}
-        temperature={weather.temperature}
+        weatherEmoji={weather?.condition}
+        temperature={weather?.temperature}
       />
       <List
         activities={filteredActivities}
-        isGoodWeather={weather.isGoodWeather}
+        isGoodWeather={weather?.isGoodWeather}
       />
       <Form addActivity={addActivity} />
     </div>
