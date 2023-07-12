@@ -19,8 +19,8 @@ export default function Form({ addActivity }) {
         aria-labelledby="favourite-holiday"
         onSubmit={handleSubmit}
       >
-        <h1>This is the heading</h1>
-        <label htmlFor="activity">Add new activity: </label>
+        <h1>Our activity form</h1>
+        <label htmlFor="name">Add new activity: </label>
         <input
           id="name"
           type="text"

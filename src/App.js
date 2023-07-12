@@ -2,9 +2,13 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import { uid } from "uid";
 import Form from "./components/Form";
+import List from "./components/List";
+import useLocalStorageState from "use-local-storage-state";
 
 function App() {
-  const [activities, setActivities] = useState([]);
+  const [activities, setActivities] = useLocalStorageState("activities", {
+    defaultValue: [],
+  });
   const [weather, setWeather] = useState([]);
 
   function addActivity(newActivity) {
@@ -32,7 +36,11 @@ function App() {
 
   console.log(activities);
 
-  return <Form addActivity={addActivity} />;
+  return (
+    <main>
+      <List activities={activities} />
+      <Form addActivity={addActivity} />
+    </main>
+  );
 }
-
 export default App;
