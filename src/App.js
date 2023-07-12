@@ -4,12 +4,15 @@ import { uid } from "uid";
 import Form from "./components/Form";
 import List from "./components/List";
 import useLocalStorageState from "use-local-storage-state";
+import TemperatureDisplay from "./components/TemperatureDisplay";
 
 function App() {
   const [activities, setActivities] = useLocalStorageState("activities", {
     defaultValue: [],
   });
-  const [weather, setWeather] = useState([]);
+  const [weather, setWeather] = useLocalStorageState("weather", {
+    defaultValue: null,
+  });
 
   function addActivity(newActivity) {
     setActivities([...activities, { id: uid(), ...newActivity }]);
@@ -36,11 +39,22 @@ function App() {
 
   console.log(activities);
 
+  const filteredActivities = activities.filter(
+    (activity) => activity.isforGoodWeather === weather?.isGoodWeather
+  );
+
   return (
-    <main>
+    <div>
+      <TemperatureDisplay
+        weatherEmoji={weather.condition}
+        temperature={weather.temperature}
+      />
+      <List
+        activities={filteredActivities}
+        isGoodWeather={weather.isGoodWeather}
+      />
       <Form addActivity={addActivity} />
-      <List activities={activities} />
-    </main>
+    </div>
   );
 }
 export default App;
