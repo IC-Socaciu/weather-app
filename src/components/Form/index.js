@@ -20,6 +20,7 @@ export default function Form({ addActivity }) {
         onSubmit={handleSubmit}
       >
         <h1>Our activity form</h1>
+
         <label htmlFor="name">Add new activity: </label>
         <input
           id="name"
@@ -28,7 +29,7 @@ export default function Form({ addActivity }) {
           placeholder="e.g. name new activity"
         />
         <label htmlFor="isGoodWeather">Good-weather activity: </label>
-        <input id="checkbox" type="checkbox" name="isForGoodWeather" />
+        <input id="isGoodWeather" type="checkbox" name="isForGoodWeather" />
         <button type="submit" className="form__submit-button">
           Submit
         </button>

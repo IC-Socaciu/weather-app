@@ -38,8 +38,8 @@ function App() {
 
   return (
     <main>
-      <List activities={activities} />
       <Form addActivity={addActivity} />
+      <List activities={activities} />
     </main>
   );
 }
