@@ -46,11 +46,11 @@ function App() {
     };
   }, [setWeather]);
 
-  // console.log(activities);
+  console.log(activities);
 
-  const filteredActivities = activities.filter(
-    (activity) => activity.isforGoodWeather === weather?.isGoodWeather
-  );
+  // const filteredActivities = activities.filter(
+  //   (activity) => activity.isforGoodWeather === weather?.isGoodWeather
+  // );
 
   return (
     <div>
@@ -59,7 +59,9 @@ function App() {
         temperature={weather?.temperature}
       />
       <List
-        activities={filteredActivities}
+        activities={activities.filter(
+          (activity) => activity.isforGoodWeather === weather?.isGoodWeather
+        )}
         isGoodWeather={weather?.isGoodWeather}
       />
       <Form addActivity={addActivity} />
